@@ -1,0 +1,68 @@
+swagger: "2.0"
+info: 
+  description: ""
+  version: "1.0.1"
+  title: "HubIT CMS"
+host: "http://localhost:60005"
+basePath: "/"
+tags:
+- name: "Authentication"
+  description: "Everything Authentication"
+- name: "Publisher"
+  description: "Everything related to publisher"
+schemes: 
+- "https"
+paths:
+  /publisher/new:
+    post:
+      tags: 
+      - Publisher
+      summary: ""
+      description: ""
+      operationId: "addPublisher"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Create new publisher"
+        required: true
+        schema:
+          $ref: "#/definitions/Publisher"
+      responses:
+        "200":
+          description: "Successful Operation"
+          schema:
+            $ref: "#/definitions/Publisher"
+        "405":
+          description: "Method Not Allowed"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "x-access-token"
+    in: "header"
+definitions:
+  Publisher:
+    type: "object"
+    required:
+    - "name"
+    - "email"
+    - "phone"
+    - "plaform"
+    properties: 
+      id: 
+        type: "integer"
+        format: "int64"
+      name: 
+        type: "string"
+        example: "John Doe"
+      email:
+        type: "string"
+        example: "johndoe@example.com"
+      phone:
+        type: "string"
+      position: 
+        type: "string"
+      

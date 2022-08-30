@@ -1,0 +1,38 @@
+{
+  "name": "hubit-core",
+  "version": "1.0.0",
+  "description": "Application Programming Interface Endpoints",
+  "main": "api.js",
+  "scripts": {
+    "dev": "nodemon api.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "madeyinka01",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cloudinary": "^1.30.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "googleapis": "^104.0.0",
+    "html-to-text": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "juice": "^8.0.0",
+    "moment-timezone": "^0.5.34",
+    "mongoose": "^6.4.1",
+    "nodemailer": "^6.7.6",
+    "nodemailer-mailgun-transport": "^2.1.4",
+    "swagger-ui-express": "^4.4.0",
+    "winston": "^3.8.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}

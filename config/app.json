@@ -1,0 +1,32 @@
+{
+    "app_name": "HubIT CMS",
+    "app_version": "1.0.0",
+    "app_url": "127.0.0.1",
+    "app_base": "/client",
+    "api": {
+        "_url": "/api",
+        "_version": "/1.0"
+    },
+    "mongodb": {
+        "db": "hub",
+        "host": "127.0.0.1",
+        "port": "27017",
+        "username":""
+    },
+    "jwt": {
+        "key": "18LuckyStars!!!",
+        "expires": "1d"
+    },
+    "sender": {
+        "system":"system@hubitcms.com",
+        "admin":"admin@hubitcms.com",
+        "info":"info@hubitcms.com",
+        "noreply":"noreply@hubitcms.com"
+    },
+    "oauth": {
+        "user": "mustytryst@gmail.com",
+        "clientId": "1021982503904-ot95c69blpmpa5njbapih5489kjbb4mf.apps.googleusercontent.com",
+        "secret": "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",
+        "refreshtoken": "1//04o83Zi3qf3jrCgYIARAAGAQSNwF-L9IrYLfCiIqIDofF_zVOdNwcdxh3VT32A42wOS_re4VIbmttnfz5t2K3ltvAMy9cMGbYe3g"
+    }
+}
