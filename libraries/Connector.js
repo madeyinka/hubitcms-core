@@ -10,7 +10,8 @@ const Connector = {
     MongoDB: () => {
         if (Connector._mongo === null) {
             const mongoose = require('mongoose')
-            const url = 'mongodb://'+_config.mongodb.host+':'+_config.mongodb.port+'/'+_config.mongodb.db
+            const url = process.env.NODE_ENV == 'development' ? 'mongodb://'+_config.mongodb.host+':'+_config.mongodb.port+'/'+_config.mongodb.db :
+                          process.env.MONGODB_URL
             Connector._mongo = mongoose.connection
 
             Connector._mongo.once('open', () => {console.log('Database Connection Initiated')})
