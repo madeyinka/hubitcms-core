@@ -8,7 +8,7 @@ const postSchema = new mongoose.Schema({
     subcategory:{type:Object, default:{}},
     short_content:{type:String, default:""},
     content:{type:String, default:""},
-    keywords:{type:[String], default:[]},
+    keywords:{type:[Object], default:[]},
     link:{type:String, default:""},
     type:{type:Object, default:{}},
     image:{type:String, default:""},
@@ -17,7 +17,7 @@ const postSchema = new mongoose.Schema({
     post_settings: {
         featured:{type:Boolean, default:0},
         slider:{type:Boolean, default:0},
-        sticky:{type:Boolean, default:0},
+        popular:{type:Boolean, default:0},
         editor:{type:Boolean, default:0},
         facebook:{type:Boolean, default:0},
         instagram:{type:Boolean, default:0},
@@ -25,7 +25,7 @@ const postSchema = new mongoose.Schema({
     },
     seo:{
         title:{type:String, default:""},
-        keywords:{type:[String], default:[]},
+        keywords:{type:[Object], default:[]},
         description:{type:String, default:""}
     },
     status:{type:Boolean, default:0},
