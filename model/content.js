@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Category = require("./category")
 const Post = require("./post")
+const Author = require("./author")
 
 const contentSchema = new mongoose.Schema({
     user: {
@@ -8,7 +9,8 @@ const contentSchema = new mongoose.Schema({
         ref: "admin_user"
     },
     categories:[Category.schema],
-    posts:[Post.schema]
+    posts:[Post.schema],
+    post_authors:[Author.schema]
 })
 
 module.exports = mongoose.model("content", contentSchema)
