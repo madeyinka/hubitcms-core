@@ -54,40 +54,77 @@ const PostInit = {
         }
     },
 
-    updatePost: async (req, res) => {
+    updatePost: (req, res) => {
         const id = req.user.id, post_id = req.body.id 
-        try {
-            const content = await ContentModel.findOne({user:id})
-            if (content) {
-                content.posts = req.body
-                content.save()
-                .then(resp => {
-                    return res.status(201).json({
-                        success:true,
-                        message:"update successful",
-                        data: {
-                            statusCode:201,
-                            posts:resp.posts
-                        }
-                    })
-                })   
-            } else {
+            
+        ContentModel.findOne({user:id})
+        .then (content => {
+            const posts = content.posts
+            let post = posts.find(post => post.id === post_id)
+            
+            if (!post) {
                 return res.status(404).json({
                     success:false,
-                    message:"Content not found.",
+                    message:"Post not found",
                     error:{
                         statusCode:404,
-                        description:"Content not found."
+                        description:"Post not found"
                     }
                 })
             }
-        } catch(error) {
-            res.status(400).json({
-                success:false,
-                message:error.message,
-                error:{}
+
+            post.title = req.body.title
+            post.category = req.body.category
+            post.type = req.body.type
+            post.short_content = req.body.short_content
+            post.content = req.body.content
+            post.author = req.body.author
+            post.keywords = req.body.keywords
+            post.image = req.body.image
+            post.status = req.body.status
+            post.pub_date = req.body.pub_date
+            post.date_modified = req.body.date_modified
+            post.seo.title = req.body.seo.title
+            post.seo.keywords = req.body.seo.keywords
+            post.seo.description = req.body.seo.description
+            post.post_settings.featured = req.body.post_settings.featured
+            post.post_settings.slider = req.body.post_settings.slider
+            post.post_settings.popular = req.body.post_settings.popular
+            post.post_settings.editor = req.body.post_settings.editor
+            post.post_settings.facebook = req.body.post_settings.facebook
+
+            content.save()
+            .then(() => {
+                return res.status(200).json({
+                    success:true,
+                    message:"Post update successful",
+                    data: {
+                        statusCode:200,
+                        post: content.posts.find(post => post.id === post_id)
+                    }
+                })
             })
-        }
+            .catch(err => {
+                res.status(500).json({
+                    success:false,
+                    message:err.message,
+                    error:{
+                        statusCode:500,
+                        description:err.message
+                    }
+                })
+            })
+        })
+        .catch (err => {
+            res.status(500).json({
+                succcess:false,
+                messsage:err.message,
+                error: {
+                    statusCode:500,
+                    description:err.message
+                }
+            })
+        })
     },
 
     getAllPosts: async (req, res) => {
