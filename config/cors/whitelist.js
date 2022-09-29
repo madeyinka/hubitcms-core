@@ -6,7 +6,8 @@ const whiteListed = [
     'https://hubit-dashboard.vercel.app',
     'https://enugu-monitor.vercel.app',
     'https://www.enugumonitor.com',
-    'https://enugumonitor.com'
+    'https://enugumonitor.com',
+    'https://enugu-monitor-revamp.vercel.app/'
 ]
 
 module.exports = whiteListed
