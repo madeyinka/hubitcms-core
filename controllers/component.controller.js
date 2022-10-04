@@ -1,32 +1,66 @@
-const PlatformModel = require('../model/platform')
+const ContentModel = require('../model/content')
 
 const ComponentInit = {
 
     createComponent: async (req, res) => {
         const id = req.user.id
         try {
-            const platform = await PlatformModel.findOne({user:id})
-            if (platform) {
-                platform.components.push({
+            const content = await ContentModel.findOne({user:id})
+            if (!content) {
+                const component = new ContentModel({})
+                component.user = req.user.id
+                component.components.push({
                     id:req.body.id,
                     label:req.body.label,
                     slug:req.body.slug,
                     description:req.body.description,
                     tags:req.body.tags
                 })
-                platform.save()
-                .then(component => {
+                component.save()
+                .then(result => {
+                    console.log(result.data)
                     return res.status(201).json({
-                        success: true,
-                        message: "success",
+                        success:true,
+                        message:"success",
                         data: {
                             statusCode:201,
-                            response:component
+                            response:result
                         }
                     })
                 })
                 .catch(err => {
-                    res.send(err)
+                    res.status(400).json({
+                        success:false,
+                        message:err.message,
+                        error:{}
+                    })
+                })
+            } else {
+                content.components.push({
+                   id:req.body.id,
+                   label:req.body.label,
+                   slug:req.body.slug,
+                   description:req.body.description,
+                   tags:req.body.tags
+                })
+                content.save()
+                .then(result => {
+                    return res.status(201).json({
+                        success:true,
+                        message:"success",
+                        data:{
+                            statusCode:201,
+                            response:result
+                        }
+                    })
+
+                })
+                .catch(err => {
+                    res.status(400).json({
+                        success:false,
+                        message:err.message,
+                        error:{}
+                    })
                 })
             }
         } catch (error) {
@@ -41,8 +75,8 @@ const ComponentInit = {
     getAllComponents: async (req, res) => {
         const id = req.user.id
         try {
-            const platform = await PlatformModel.findOne({user:id})
-            if (!platform) {
+            const content = await ContentModel.findOne({user:id})
+            if (!content) {
                 return res.status(404).json({
                     success: false,
                     message: "User not found",
@@ -52,7 +86,7 @@ const ComponentInit = {
                     }
                 })
             } else {
-                let components = platform.components
+                let components = content.components
                 return res.status(200).json({
                     success:true,
                     message:"Data found",
@@ -75,17 +109,19 @@ const ComponentInit = {
     updateComponent: async (req, res) => {
         const id = req.user.id
         const comp_id = req.body.id
-        const platform = await PlatformModel.findOne({user:id})
-        if (platform) {
-            const components = platform.components
+        const content = await ContentModel.findOne({user:id})
+        if (content) {
+            const components = content.components
             components.forEach(component => {
                 if (component.id === comp_id) {
                     component.label = req.body.label,
                     component.slug = req.body.slug,
                     component.description = req.body.description,
                     component.tags = req.body.tags
-                    platform.save()
+                    component.date_modified = Date.now()
+                    content.save()
                     .then(result => {
+                        //console.log(result.data)
                         return res.status(201).json({
                             success:true,
                             message:"Component update successful",

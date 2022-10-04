@@ -10,5 +10,6 @@ router.use(api+'/component', require('./component'))
 router.use(api+'/category', require('./category'))
 router.use(api+'/post', require('./post'))
 router.use(api+'/assets', require('./assets'))
+router.use(api+'/service', require('./service'))
 
 module.exports = router

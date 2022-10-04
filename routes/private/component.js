@@ -5,7 +5,7 @@ const component = require('../../controllers/component.controller')
 
 router.post('/create', auth, component.createComponent)
 router.get('/pull', auth, component.getAllComponents)
-router.put('/update', auth, component.updateComponent)
+router.post('/update', auth, component.updateComponent)
 router.delete('/delete', auth, component.deleteComponent)
 
 module.exports = router

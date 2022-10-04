@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const Component = require('./component')
 
 const platformSchema = mongoose.Schema({
     user: {
@@ -16,8 +15,7 @@ const platformSchema = mongoose.Schema({
         website:{type:String, default:"Not Set"},
         description:{type:String, default:""},
         logo:{type:String, default:""}
-    },
-    components:[Component.schema]
+    }
 })
 
 module.exports = mongoose.model("platform", platformSchema)

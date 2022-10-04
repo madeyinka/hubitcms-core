@@ -73,13 +73,13 @@ const CategoryInit = {
                         category.image = req.body.image
                         category.date_modified = Date.now()
                         content.save()
-                        .then(category => {
+                        .then(result => {
                             return res.status(201).json({
                                 success:true,
                                 message:"Update Successful",
                                 data:{
                                     statusCode:201,
-                                    response:category
+                                    response:result
                                 }
                             })
                         })
@@ -96,7 +96,7 @@ const CategoryInit = {
                 })
             }
         } catch (error) {
-            return res.status(400).json({
+            res.status(400).json({
                 success:false,
                 message:error.message,
                 error:{}
