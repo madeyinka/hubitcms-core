@@ -8,7 +8,8 @@ const whiteListed = [
     'https://www.enugumonitor.com',
     'https://enugumonitor.com',
     'https://enugu-monitor-revamp.vercel.app',
-    'https://topedare.org'
+    'https://topedare.org',
+    'https://topedare.vercel.app'
 ]
 
 module.exports = whiteListed
