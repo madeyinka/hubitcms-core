@@ -8,5 +8,6 @@ router.use('/documentation', require('./documentation'))
 router.use(api+'/register', require('./register'))
 router.use(api +'/auth', require('./auth'))
 router.use(api+'/public/content', require('./content'))
+router.use(api+'/public/contact', require('./contact'))
 
 module.exports = router

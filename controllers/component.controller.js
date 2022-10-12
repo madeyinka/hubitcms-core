@@ -156,7 +156,44 @@ const ComponentInit = {
     },
 
     deleteComponent: async (req, res) => {
-        
+        const user = req.user.id, id = req.query.identity
+        try {
+            const content = await ContentModel.findOne({user:user})
+            if (!content) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found",
+                    error: {
+                        statusCode: 404,
+                        description: "User not found"
+                    }
+                })
+            } else {
+                let components = content.components
+                components.forEach((component, index) => {
+                    if (component.id === id) {
+                        components.splice(index, 1)
+                    }
+                })
+                content.save()
+                .then(() => {
+                    return res.status(200).json({
+                        success:true,
+                        message:"Item successfully deleted",
+                        data:{
+                            statusCode:200,
+                            components
+                        }
+                    })
+                })
+            }
+        } catch(err) {
+            res.status(500).json({
+                success:false,
+                message:err.message || "Error Encountered",
+                error:{}
+            })
+        }
     }
 }
 
