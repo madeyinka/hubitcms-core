@@ -48,6 +48,38 @@ const ContactInit = {
                 error:{}
             })
         }
+    },
+
+    getUnits: async (req, res) => {
+        const user = req.query.user
+        try {
+            const contact = await ContactModel.findOne({user:user})
+            if (!contact) {
+                return res.status(404).json({
+                    success:false,
+                    message:"contact not found",
+                    error:{
+                        statusCode:404,
+                        description:"Contact not found."
+                    }
+                })
+            } else {
+                return res.status(200).json({
+                    success:true,
+                    message:"Data found",
+                    data:{
+                        statusCode:200,
+                        units:contact.units
+                    }
+                })
+            }
+        } catch (err) {
+            return res.status(400).json({
+                success:false,
+                message:err.message,
+                error:{}
+            })
+        }
     }
 }
 
