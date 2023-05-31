@@ -19,13 +19,13 @@ const app = express()
 //connect to database
 MongoDB()
 
-// app.use(credentials)
+app.use(credentials)
 app.use(cors())
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(require('./routes/public'))
 app.use(require('./routes/private'))
-// app.use(cookieParser())
+app.use(cookieParser())
  
 //handle image reference in prodcution env.
 app.use(express.static(path.join(__dirname, 'public')))
